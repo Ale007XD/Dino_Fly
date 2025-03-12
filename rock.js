@@ -34,12 +34,16 @@ class RockGenerator {
   }
 
   createRock() {
-    const yLevels = [-8, 0, 8];
-    const position = new THREE.Vector3(
-      (Math.random() - 0.5) * 40,
-      yLevels[Math.floor(Math.random() * 3)],
-      -200
-    );
+  // Увеличиваем диапазон по X и Y
+  const position = new THREE.Vector3(
+    (Math.random() - 0.5) * 50, // x от -25 до 25 (было 30)
+    (Math.random() - 0.5) * 30 + 5, // y от -10 до 20 (добавлен сдвиг +5)
+    this.spawnDistance
+  );
+
+  // Увеличиваем максимальный размер скал
+  const size = 1 + Math.random() * 3 * this.difficulty; // Было 2
+  }
 
     const rock = new Rock(position, 2 + Math.random() * 4);
     this.scene.add(rock.object);
