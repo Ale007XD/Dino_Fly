@@ -1,49 +1,45 @@
 class Terrain {
   constructor(scene) {
     this.scene = scene;
-    this.ground = null;
-    this.mountains = [];
-    
     this.createGround();
-    this.generateMountains();
+    this.createMountains();
   }
 
   createGround() {
-    // Создаем плоскость для земли
-    const geometry = new THREE.PlaneGeometry(200, 200, 50, 50);
+    const geometry = new THREE.PlaneGeometry(500, 500, 50, 50);
     const material = new THREE.MeshStandardMaterial({
-      color: 0x4CAF50,
+      color: 0x3CB371,
       roughness: 0.8,
       metalness: 0.1
     });
-    
-    this.ground = new THREE.Mesh(geometry, material);
-    this.ground.rotation.x = -Math.PI / 2;
-    this.ground.position.y = -15;
-    this.scene.add(this.ground);
+
+    const ground = new THREE.Mesh(geometry, material);
+    ground.rotation.x = -Math.PI / 2;
+    ground.position.y = -10;
+    this.scene.add(ground);
   }
 
-  generateMountains() {
-    // Генерация случайных гор
-    const mountainGeo = new THREE.PlaneGeometry(200, 50, 100, 20);
-    const vertices = mountainGeo.attributes.position.array;
+  createMountains() {
+    const mountainGroup = new THREE.Group();
 
-    // Добавляем шум для вершин
-    for (let i = 0; i < vertices.length; i += 3) {
-      if (i % 9 === 0) { // Только каждую 3-ю вершину
-        vertices[i + 1] = Math.random() * 10 + 5;
-      }
+    for (let i = 0; i < 15; i++) {
+      const width = 80 + Math.random() * 120;
+      const height = 40 + Math.random() * 60;
+      const geometry = new THREE.ConeGeometry(width, height, 32);
+      const material = new THREE.MeshStandardMaterial({
+        color: 0x4682B4,
+        roughness: 0.7
+      });
+
+      const mountain = new THREE.Mesh(geometry, material);
+      mountain.position.set(
+        (Math.random() - 0.5) * 1000,
+        -height / 2 - 5,
+        -500 + Math.random() * 200
+      );
+      mountainGroup.add(mountain);
     }
-    mountainGeo.attributes.position.needsUpdate = true;
 
-    const mountainMat = new THREE.MeshStandardMaterial({
-      color: 0x607D8B,
-      side: THREE.DoubleSide
-    });
-
-    const mountains = new THREE.Mesh(mountainGeo, mountainMat);
-    mountains.rotation.x = Math.PI / 2;
-    mountains.position.set(0, -10, -50);
-    this.scene.add(mountains);
+    this.scene.add(mountainGroup);
   }
 }
