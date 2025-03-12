@@ -19,7 +19,8 @@ class Game {
     this.terrain = new Terrain(this.scene);
     this.rockGenerator = new RockGenerator(this.scene);
     this.scene.add(this.pterodactyl.object);
-    this.camera.position.set(0, 0, 50);
+    this.camera.position.set(0, 5, 70); // Отодвигаем камеру дальше
+    this.camera.lookAt(0, 0, 0);
 
     // Состояние игры
     this.isGameOver = false;
