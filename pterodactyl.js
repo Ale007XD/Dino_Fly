@@ -60,13 +60,15 @@ class Pterodactyl {
     wings[1].rotation.z = -Math.sin(time * 5) * 0.2;
   }
 
-  update(controls) {
-    // Вертикальное движение
-    if (controls.up) {
-      this.velocity.y += this.lift;
-    } else {
-      this.velocity.y *= 0.95;
-    }
+  update(controls, deltaTime) {
+  // Добавляем возможность снижения при отпускании клавиши
+  if (!controls.up) {
+    this.velocity.y -= this.lift * 0.5; // Плавное снижение
+  }
+
+  // Остальная логика без изменений
+  // ...
+  }
 
     // Горизонтальное движение
     if (controls.left) {
