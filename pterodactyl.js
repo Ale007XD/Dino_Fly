@@ -49,7 +49,11 @@ class Pterodactyl {
     this.speed = 0.1;
     this.lift = 0.02;
     this.boundingRadius = 1.0;
-  }
+
+  // Увеличиваем масштаб модели в 1.5 раза
+  this.object.scale.set(1.5, 1.5, 1.5);
+  this.boundingRadius *= 1.5; // Обновляем радиус столкновений
+    }
 
   animateWings(time) {
     const wings = this.object.children.filter(child => 
