@@ -4,7 +4,7 @@ class Pterodactyl {
 
     // Материал тела
     const material = new THREE.MeshStandardMaterial({
-      color: 0x8B7765,
+      color: 0xFFFF00,
       roughness: 0.7,
       metalness: 0.1
     });
@@ -24,7 +24,7 @@ class Pterodactyl {
 
     // Крылья (плоскости)
     const wingMaterial = new THREE.MeshStandardMaterial({
-      color: 0x8B7765,
+      color: 0xFFFF00,
       side: THREE.DoubleSide,
       transparent: true,
       opacity: 0.9
