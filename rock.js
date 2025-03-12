@@ -6,6 +6,7 @@ class Rock {
       roughness: 0.8,
       metalness: 0.1
     });
+  }
 
     // Деформация вершин
     const vertices = geometry.attributes.position.array;
