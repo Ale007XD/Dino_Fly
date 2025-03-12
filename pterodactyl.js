@@ -55,14 +55,19 @@ class Pterodactyl {
   this.boundingRadius *= 1.5; // Обновляем радиус столкновений
     }
 
-  animateWings(time) {
-    const wings = this.object.children.filter(child => 
-      child.geometry.type === "PlaneGeometry"
-    );
+  // Строка 78: исправление индексации массива
+animateWings(time) {
+  const wings = this.object.children.filter(child => 
+    child.geometry instanceof THREE.PlaneGeometry);
+  
+  if (wings.length === 2) {
+    const leftWing = wings[0]; // Было wings[^0]
+    const rightWing = wings[1]; // Было wings[^1]
     
-    wings[0].rotation.z = Math.sin(time * 5) * 0.2;
-    wings[1].rotation.z = -Math.sin(time * 5) * 0.2;
+    leftWing.rotation.z = Math.sin(time * 5) * 0.2;
+    rightWing.rotation.z = -Math.sin(time * 5) * 0.2;
   }
+}
 
   update(controls, deltaTime) {
   // Добавляем возможность снижения при отпускании клавиши
